@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: Products API
+  description: |-
+    Products API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: http://localhost:8080
+paths:
+  /HandleProducts:
+    get:
+      summary: Lists existing products
+      description: Update an existing task by Id
+      operationId: updateTask
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Add a new Product 
+      description: Add a new Product to DB
+      operationId: addProduct
+      requestBody:
+        description: Create a new Product in DB
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'          
+  /HandleProducts/{id}:
+    delete:
+      summary: Deletes a Product
+      description: delete a Product
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product deleted
+        '400':
+          description: Invalid Product ID
+    put:
+      summary: Updates a Product
+      description: updates a Product
+      operationId: updateProduct
+      requestBody:
+        description: Updates existing Product in DB
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product updated
+        '400':
+          description: Invalid Product ID
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+          format: double
