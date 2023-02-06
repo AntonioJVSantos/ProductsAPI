@@ -2,11 +2,11 @@ package com.vodafone.exercise2.exercise2;
 import java.util.ArrayList;
 
 public class Catalogo {
-    private ArrayList<Produto> catalogo;
+    private ArrayList<Produto> listaProdutos;
     private static Catalogo single=null;
 
     private Catalogo(){
-        this.catalogo=new ArrayList<>();        
+        this.listaProdutos=new ArrayList<>();        
     }
     
     public static Catalogo getCatalogo(){
@@ -16,14 +16,14 @@ public class Catalogo {
         return single;
     }
     public void addProduto(Produto prod){
-        catalogo.add(prod);
+        listaProdutos.add(prod);
     }
     public ArrayList<Produto> getList(){
-        return catalogo;
+        return listaProdutos;
     }
     public Produto updateProduto(String id,Produto novo){
         boolean found=false;
-        for(Produto p:catalogo){
+        for(Produto p:listaProdutos){
             if(p.getId().equals(id)){
                 p.setId(novo.getId());
                 p.setName(novo.getName());
@@ -38,13 +38,13 @@ public class Catalogo {
     }
     public Produto removeProduto(String id){
         Produto temp=null;
-        for(Produto p:catalogo){
+        for(Produto p:listaProdutos){
             if (p.getId().equals(id)){
                 temp=p;
             }            
         }
         if(temp!=null){
-            catalogo.remove(temp);
+            listaProdutos.remove(temp);
         }
         return temp;
     }
